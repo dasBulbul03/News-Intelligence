@@ -1,6 +1,6 @@
 # News Intelligence RAG API
 
-A scalable Retrieval-Augmented Generation (RAG) API for news intelligence, built with Node.js, Express, PostgreSQL, Redis, and Qdrant.
+A scalable Retrieval-Augmented Generation (RAG) API for news intelligence with a modern React frontend, built with Node.js, Express, PostgreSQL, Redis, and Qdrant.
 
 ## Architecture
 
@@ -38,6 +38,7 @@ Return Response + Log to DB
 
 ## Tech Stack Choices
 
+### Backend
 - **Node.js/Express**: Fast, scalable backend framework
 - **PostgreSQL**: Structured data storage for logs
 - **Redis**: In-memory storage for session chat history
@@ -45,7 +46,15 @@ Return Response + Log to DB
 - **HuggingFace**: Open-source embeddings model
 - **Google Gemini**: Powerful LLM for generation
 - **BullMQ**: Reliable job queue for ingestion
+
+### Frontend
+- **React**: Modern, component-based UI library
+- **CSS3**: Beautiful, responsive styling with gradients and animations
+- **Nginx**: Production-ready web server for static files
+
+### DevOps
 - **Docker**: Containerization for easy deployment
+- **Docker Compose**: Multi-container orchestration
 
 ## Setup
 
@@ -66,8 +75,9 @@ Return Response + Log to DB
    docker-compose up -d
    ```
 
-4. **Access the API:**
-   - API: `http://localhost:3000`
+4. **Access the application:**
+   - Frontend: `http://localhost:3001` (React app)
+   - Backend API: `http://localhost:3000`
    - Health Check: `http://localhost:3000/health`
    - Swagger Docs: `http://localhost:3000/api-docs`
 
@@ -98,8 +108,28 @@ Return Response + Log to DB
    ```
 
 5. **Using startup scripts:**
-   - Windows: Double-click `start-server.bat` or run `.\start-server.ps1`
-   - The script automatically handles port conflicts and dependency installation
+   - Backend only: Double-click `start-server.bat` or run `.\start-server.ps1`
+   - Full stack (Backend + Frontend): Run `.\start-fullstack.ps1`
+   - The scripts automatically handle port conflicts and dependency installation
+
+### Running Frontend Separately
+
+1. **Navigate to frontend directory:**
+   ```bash
+   cd frontend
+   ```
+
+2. **Install dependencies (if not already done):**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+   ```bash
+   npm start
+   ```
+
+4. **The frontend will open at:** `http://localhost:3001`
 
 ## API Endpoints
 
