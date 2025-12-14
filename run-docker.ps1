@@ -60,7 +60,7 @@ if ($LASTEXITCODE -eq 0) {
     Write-Host "To stop: docker-compose down" -ForegroundColor Yellow
 } else {
     Write-Host ""
-    Write-Host "❌ Failed to start services. Check the errors above." -ForegroundColor Red
+    Write-Host "Failed to start services. Check the errors above." -ForegroundColor Red
     exit 1
 }
 
