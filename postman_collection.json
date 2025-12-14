@@ -1,0 +1,71 @@
+{
+    "info": {
+        "name": "News Intelligence RAG API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Ingest News",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/ingest",
+                    "host": ["{{base_url}}"],
+                    "path": ["ingest"]
+                }
+            }
+        },
+        {
+            "name": "Chat",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"sessionId\": \"session1\",\n    \"query\": \"What is the latest news?\"\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/chat",
+                    "host": ["{{base_url}}"],
+                    "path": ["chat"]
+                }
+            }
+        },
+        {
+            "name": "Get History",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/history/session1",
+                    "host": ["{{base_url}}"],
+                    "path": ["history", "session1"]
+                }
+            }
+        },
+        {
+            "name": "Delete History",
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                    "raw": "{{base_url}}/history/session1",
+                    "host": ["{{base_url}}"],
+                    "path": ["history", "session1"]
+                }
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:3000"
+        }
+    ]
+}
