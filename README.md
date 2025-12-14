@@ -49,11 +49,57 @@ Return Response + Log to DB
 
 ## Setup
 
-1. Clone the repository
-2. Copy `.env.example` to `.env` and fill in API keys
-3. Run `docker-compose up` to start all services
-4. The API will be available at `http://localhost:3000`
-5. Swagger docs at `http://localhost:3000/api-docs`
+### Using Docker (Recommended)
+
+1. **Prerequisites:**
+   - Docker Desktop installed and running
+   - Git installed
+
+2. **Clone the repository:**
+   ```bash
+   git clone https://github.com/dasBulbul03/News-Intelligence.git
+   cd News-Intelligence
+   ```
+
+3. **Start all services:**
+   ```bash
+   docker-compose up -d
+   ```
+
+4. **Access the API:**
+   - API: `http://localhost:3000`
+   - Health Check: `http://localhost:3000/health`
+   - Swagger Docs: `http://localhost:3000/api-docs`
+
+5. **Stop services:**
+   ```bash
+   docker-compose down
+   ```
+
+### Using Node.js (Development)
+
+1. **Prerequisites:**
+   - Node.js 20+ installed
+   - PostgreSQL, Redis, and Qdrant running (or use Docker for these services)
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment:**
+   - Create `.env` file with required variables (see `.env.example`)
+
+4. **Start the server:**
+   ```bash
+   npm start
+   # or for development with auto-reload:
+   npm run dev
+   ```
+
+5. **Using startup scripts:**
+   - Windows: Double-click `start-server.bat` or run `.\start-server.ps1`
+   - The script automatically handles port conflicts and dependency installation
 
 ## API Endpoints
 
@@ -84,4 +130,63 @@ Delete chat history for a session.
 
 ## Production Deployment
 
-Use Docker Compose for production deployment. Ensure environment variables are set correctly.
+### Docker Deployment
+
+1. **Build and run:**
+   ```bash
+   docker-compose up -d --build
+   ```
+
+2. **View logs:**
+   ```bash
+   docker-compose logs -f app
+   ```
+
+3. **Stop and remove containers:**
+   ```bash
+   docker-compose down
+   ```
+
+4. **Remove volumes (clean slate):**
+   ```bash
+   docker-compose down -v
+   ```
+
+### Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```env
+PORT=3000
+NODE_ENV=production
+
+# PostgreSQL
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
+POSTGRES_DB=news_intelligence
+POSTGRES_USER=user
+POSTGRES_PASSWORD=password
+
+# Redis
+REDIS_HOST=redis
+REDIS_PORT=6379
+REDIS_URL=redis://redis:6379
+
+# Qdrant
+QDRANT_HOST=qdrant
+QDRANT_PORT=6333
+
+# API Keys
+HUGGINGFACE_API_KEY=your_key_here
+GOOGLE_API_KEY=your_key_here
+```
+
+## Features
+
+- ✅ Automatic port conflict resolution
+- ✅ Health check endpoint
+- ✅ Swagger API documentation
+- ✅ Docker support with multi-service setup
+- ✅ Graceful shutdown handling
+- ✅ Comprehensive error handling
+- ✅ Production-ready Dockerfile with security best practices
