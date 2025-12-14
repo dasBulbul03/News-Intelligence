@@ -56,20 +56,30 @@ app.get('/health', (req, res) => {
     });
 });
 
-// Root endpoint
-app.get('/', (req, res) => {
-    res.status(200).json({ 
-        message: 'News Intelligence RAG API',
-        version: '1.0.0',
-        endpoints: {
-            health: '/health',
-            docs: '/api-docs',
-            ingest: '/ingest',
-            chat: '/chat',
-            history: '/history'
-        }
+// Serve static files from React app in production
+if (process.env.NODE_ENV === 'production') {
+    const path = require('path');
+    app.use(express.static(path.join(__dirname, '../frontend/build')));
+    
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
     });
-});
+} else {
+    // Root endpoint for development
+    app.get('/', (req, res) => {
+        res.status(200).json({ 
+            message: 'News Intelligence RAG API',
+            version: '1.0.0',
+            endpoints: {
+                health: '/health',
+                docs: '/api-docs',
+                ingest: '/ingest',
+                chat: '/chat',
+                history: '/history'
+            }
+        });
+    });
+}
 
 // routes
 app.use('/ingest', ingestRoutes);

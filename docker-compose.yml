@@ -9,6 +9,7 @@ services:
       - REDIS_HOST=redis
       - QDRANT_HOST=qdrant
       - REDIS_URL=redis://redis:6379
+      - NODE_ENV=production
     depends_on:
       - db
       - redis
@@ -16,6 +17,18 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+      - ./frontend/build:/app/frontend/build
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:80"
+    depends_on:
+      - app
+    environment:
+      - REACT_APP_API_URL=http://localhost:3000
 
   db:
     image: postgres:15
